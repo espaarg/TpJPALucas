@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 public class Pedido extends BaseEntidad{
 
     @Temporal(TemporalType.DATE)
-    private Date fecha;
+    private LocalDate fecha;
     private double total;
     private EstadoPedido estado;
     private TipoEnvio tipoEnvio;
@@ -38,4 +39,13 @@ public class Pedido extends BaseEntidad{
     public void agregarDetallePedido(DetallePedido detPed){
         Detallepedidos.add(detPed);
     }
+
+    public void mostrarDetalles(){
+        System.out.println("Detalles del pedido: ");
+        for (DetallePedido detalle: Detallepedidos){
+            System.out.println("Cantidad: " + detalle.getCantidad() + ", Subtotal: " + detalle.getSubtotal() );
+        }
+    }
+
+
 }

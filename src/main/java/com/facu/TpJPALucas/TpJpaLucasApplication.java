@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 
 import java.sql.SQLOutput;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
@@ -30,7 +31,7 @@ public class TpJpaLucasApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TpJpaLucasApplication.class, args);
-		System.out.println("Ando andando");
+
 
 	}
 
@@ -50,8 +51,15 @@ public class TpJpaLucasApplication {
 					.numero("dosCeroCeroSeis")
 					.build();
 
+			Domicilio domicilio2=Domicilio.builder()
+					.calle("Uzbekistan")
+					.localidad("Tero Dormido")
+					.numero("23123")
+					.build();
+
 			Pedido pedido1= Pedido.builder()
 					.total(20000.00)
+					.fecha(LocalDate.ofEpochDay(2002-02-03))
 					.estado(EstadoPedido.INICIADO)
 					.tipoEnvio(TipoEnvio.DELIVERY)
 					.build();
@@ -65,6 +73,7 @@ public class TpJpaLucasApplication {
 			pedido1.setFactura(factura1);
 			cliente.agregarPedido(pedido1);
 			cliente.agregarDomicilio(domicilio1);
+			cliente.agregarDomicilio(domicilio2);
 
 			Producto producto1=Producto.builder()
 					.precioCompra(20.00)
@@ -95,6 +104,7 @@ public class TpJpaLucasApplication {
 				System.out.println("Nombre: "+ clienteRecuperado.getNombre());
 				System.out.println("Apellido: "+ clienteRecuperado.getApellido());
 				System.out.println("Email: "+ clienteRecuperado.getEmail());
+				clienteRecuperado.mostrarDomicilios();
 			}
 
 
